@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --color-primary: #6C9BCF;
+    --color-success: #1b9c85;
+    --color-danger: #ff0060;
+
+    --color-info-dark: #7d8da1;
+    --color-background: #f0f0f0;
+    --color-white: #fff;
+    --color-dark: #363949;
+    --color-dark-variant: #677483;
+
+    --box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.2);
+    --boby-padding: 10px 20px;
+    --card-padding: 20px;
+    --task-padding: 10px 20px;
+    --padding: 8px 20px;
+}
+
+.dark-theme{
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffc;
+    --color-dark-variant: #a3bdcc;
+    --box-shadow: 0 32px 48px rgba(0, 0, 0, 0.4);
+}
+
+*{
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+@keyframes fadeInAnimation {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes slide {
+    50% {
+        left: 10%;
+        top: -40%;
+    }
+    100% {
+        left: -15%;
+        top: -15%;
+    }
+}
