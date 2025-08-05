@@ -11,3 +11,7 @@ export {Task} from './task/Task'
 export {TaskForm} from './task/TaskForm'
 export {EditModal} from './task/EditModal'
 export {TaskChart} from './task/TaskChart'
+
+//auth related components
+export {AuthForm} from './authComponents/AuthForm'
+export {TogglePanel} from './authComponents/TogglePanel'
