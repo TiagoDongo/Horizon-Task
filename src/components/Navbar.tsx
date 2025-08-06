@@ -2,6 +2,7 @@ import { RiCheckDoubleFill } from "@remixicon/react";
 import { Logo } from "./Logo";
 import { ThemeButton } from "./ThemeButton";
 import avatarImg from '../assets/images/avatarImg.jpg'
+import { Link } from "react-router-dom";
 
 export function Navbar(){
     return (
@@ -11,9 +12,13 @@ export function Navbar(){
             <Logo icon={RiCheckDoubleFill}/>
 
             <div className="flex gap-5 items-center text-[var(--color-dark)] text-base font-semibold">
-                <a href="#" className=" transition-all duration-300 hover:text-blue-500">Dashboard</a>
-                <a href="#" className=" transition-all duration-300 hover:text-blue-500">History</a>
-                <a href="#" className=" transition-all duration-300 hover:text-blue-500">Contacts</a>
+                <Link to={'/dashboard'}>
+                    <a href="#" className=" transition-all duration-300 hover:text-blue-500">Dashboard</a>
+                </Link>
+                <Link to={'/history'}>
+                    <a href="#" className=" transition-all duration-300 hover:text-blue-500">Historico</a>
+                </Link>
+                <a href="https://github.com/TiagoDongo/Horizon-Task" className=" transition-all duration-300 hover:text-blue-500">Sobre</a>
             </div>
 
             <div className="flex gap-5 items-center">

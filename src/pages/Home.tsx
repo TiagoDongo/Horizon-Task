@@ -38,11 +38,11 @@ export function Home(){
                         <div className="h-0.5 bg-[var(--color-dark)] opacity-30 w-[20vw]"></div>
                     </div>
 
-                    <div className="bg-[var(--color-info-dark)] flex py-2 px-5 rounded-xl items-center gap-5 w-3/5 flex-1 justify-between">
+                    <div className="bg-[var(--color-white)] flex py-2 px-5 rounded-xl items-center gap-5 w-3/5 flex-1 justify-between shadow-(--box-shadow)">
                         <input 
                             type="email" 
                             placeholder="Digite o seu email"
-                            className="outline-none border-none bg-[var(--color-info-dark)] text-zinc-50 rounded-md flex-1 py-1.5 px-2.5 shadow-(--box-shadow) placeholder:text-zinc-50 text-base opacity-100"
+                            className="outline-none border-none bg-[var(--color-white)] text-(--color-dark) rounded-md flex-1 py-1.5 px-2.5 shadow-(--box-shadow) placeholder:text-(--color-dark) text-base opacity-100"
                         />
                         <ButtonAction text="Cadastre-se"/>
                     </div>

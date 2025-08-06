@@ -9,7 +9,7 @@ export function Dashboard(){
     const taskToEdit = tasks.find((t) => t.id === editTaskId)
 
     return(
-        <div className="bg-[var(--color-background)] animate-[fadeInAnimation ease 2s] transition-all duration-300 pb-5 ">
+        <div className="bg-[var(--color-background)] animate-[fadeInAnimation ease 2s] transition-all duration-300 pb-5 min-h-dvh flex flex-col justify-between">
             <Navbar/>
 
             <main className="mt-[70px] flex gap-[30px] px-5 h-full">
@@ -17,15 +17,15 @@ export function Dashboard(){
 
                 <section className=" flex flex-col flex-1 gap-5">
                     <div className="flex items-center justify-between gap-5">
-                        <TaskChart text="Total Tasks" icon={RiFileList3Line} chartValue={10} status="default"/>
-                        <TaskChart text="Cocluidas" icon={RiCheckboxCircleLine} chartValue={1} status="success"/>
-                        <TaskChart text="Falhadas" icon={RiCloseCircleLine} chartValue={1} status="failure"/>
+                        <TaskChart text="Total Tasks" icon={RiFileList3Line} chartValue={0} status="default"/>
+                        <TaskChart text="Cocluidas" icon={RiCheckboxCircleLine} chartValue={0} status="success"/>
+                        <TaskChart text="Falhadas" icon={RiCloseCircleLine} chartValue={0} status="failure"/>
                     </div>
 
                     <div className="flex flex-col gap-5 mt-[30px]  h-full">
                         <SearchBar/>
 
-                        <div className="bg-[var(--color-white)] p-2.5 rounded-xl h-full ">
+                        <div className="bg-[var(--color-white)] p-2.5 rounded-xl h-full shadow-(--box-shadow)">
                             <ul className="gap-5 flex flex-col ">
                                 {tasks.map((task) => (
                                     <li key={task.id}>

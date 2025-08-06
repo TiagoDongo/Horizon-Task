@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Dashboard, Home, Login } from "./pages";
+import { Dashboard, History, Home, Login } from "./pages";
 
 export function App() {
   return (
@@ -7,6 +7,7 @@ export function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/dashboard" element={<Dashboard/>}/>
       <Route path="/signup&signin" element={<Login/>}/>
+      <Route path="/history" element={<History/>}/>
     </Routes>
   )
 }
