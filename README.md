@@ -11,7 +11,7 @@
 
 ### Funcionalidades (em andamento)
 - [x] Criação e visualização de tarefas
-- [ ] Ediçao e exclusão de tarefas
+- [x] Ediçao e exclusão de tarefas
 - [ ] filtros de pesquisa
 - [ ] integração com uma base de dados 
 - [ ] .....(mais funcionalidades em breve)
@@ -24,16 +24,23 @@
 1. Clone e entre no repositorio:
     ```bash
     git clone https://github.com/TiagoDongo/Horizon-Task.git
-
     cd Horion-Task 
     ```
 2. Instale as dependências:
     ```bash
     npm install
     ```
-3. Execute o projeto:
-    ```bash
-    npm run dev
 
-    #abra no navegador o link fornecido
+3. Instale as dependências do backend (server):
+    ```bash
+    cd server
+    npm install
+    cd ..
     ```
+    
+4. Execute o projeto:
+    ```bash
+    npm run start:dev
+    ```
+
+5. Abra no navegador o link fornecido pelo Vite (geralmente http://localhost:5173)
