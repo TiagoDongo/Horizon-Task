@@ -4,6 +4,24 @@ import { useTask } from "../hooks/useTask";
 
 export function History(){
     const { tasks, deleteTask, toggleTaskStatus } = useTask();
+
+    const now = new Date();
+
+    // Filtra tarefas concluídas (completed === true)
+    // ou falhadas (completed === false E já passou do dueDate)
+    const filteredTasks = tasks.filter(task => {
+        if (task.completed === true) return true;
+
+        if (
+            (task.completed === false || task.completed === undefined) && // não concluída
+            task.dueDate && new Date(task.dueDate) < now
+        ) {
+            return true; // falhada
+        }
+
+        return false; // pendente e dentro do prazo => não mostra
+    });
+
     return(
         <div className="bg-(--color-background) animate-[fadeInAnimation ease 2s] transition-all duration-300 pb-5 min-h-dvh flex flex-col ">
             <Navbar/>
@@ -29,7 +47,7 @@ export function History(){
                 <div className="bg-(--color-white) rounded-xl shadow-(--box-shadow) min-h-[570px] h-svh py-2.5 px-5">
                     <h1 className="text-(--color-info-dark) text-2xl font-bold">Tasks</h1>
                     <ul className="gap-5 flex flex-col ">
-                        {tasks.map((task) => (
+                        {filteredTasks.map((task) => (
                             <li key={task.id}>
                                 <Task
                                     title={task.title}

@@ -8,58 +8,56 @@ type TypeTask = {
   completed: boolean
 }
 
+const API_URL = "http://localhost:3000/task"
+
 export function useTask() {
     const [tasks, setTasks] = useState<TypeTask[]>([])
 
     useEffect(() => {
-        const stored = localStorage.getItem('tasks')
-        if (stored) {
-            try{
-                const parsed: TypeTask[] = JSON.parse(stored)
-                setTasks(parsed)
-            }catch(e) {
-                console.error('Erro ao ler tasks do localstorage:', e)
-            }
-        }
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => setTasks(data))
+            .catch(err => console.error("Erro ao buscar tarefas:", err))
     }, [])
 
-    useEffect(() => {
-        localStorage.setItem("tasks", JSON.stringify(tasks))
-    }, [tasks])
-
-    function createTask(title: string, dueDate: string, description: string){
-        const newTask: TypeTask = {
-        id: Date.now(),
-        title,
-        dueDate,
-        description,
-        completed: false,
-    };
-        setTasks(prev => [...prev, newTask]);
+    async function createTask(title: string, dueDate: string, description: string) {
+        const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, dueDate, description })
+        })
+        const newTask = await res.json()
+        setTasks(prev => [...prev, newTask])
     }
 
-    function deleteTask(id: number){
-        setTasks(prev => prev.filter(task => task.id !== id))
+    async function deleteTask(id: number) {
+        await fetch(`${API_URL}/${id}`, { method: "DELETE" })
+        setTasks(prev => prev.filter(t => t.id !== id))
     }
 
-    function editTask(id: number, updates: Partial<Omit<TypeTask, 'id'>>) {
+    async function editTask(id: number, updates: Partial<Omit<TypeTask, "id">>) {
+        const res = await fetch(`${API_URL}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updates)
+        })
+        const updated = await res.json();
         setTasks(prev =>
-        prev.map(task =>
-            task.id === id ? { ...task, ...updates } : task
-        )
+            prev.map(t => (t.id === id ? updated : t))
         )
     }
 
-    function toggleTaskStatus(id: number) {
-        setTasks(prev =>
-        prev.map(task =>
-            task.id === id ? { ...task, completed: !task.completed } : task
-        )
-        )
+    async function toggleTaskStatus(id: number) {
+        const task = tasks.find(t => t.id === id)
+        if (!task) return
+        await editTask(id, { completed: !task.completed })
     }
 
-    function clearCompletedTasks() {
-        setTasks(prev => prev.filter(task => !task.completed))
+    async function clearCompletedTasks() {
+        const completedIds = tasks.filter(t => t.completed).map(t => t.id)
+        for (const id of completedIds) {
+        await deleteTask(id)
+        }
     }
 
     return {

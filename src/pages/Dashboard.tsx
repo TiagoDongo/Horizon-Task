@@ -8,6 +8,20 @@ export function Dashboard(){
     const [editTaskId, setEditTaskId] = useState<number | null>(null)
     const taskToEdit = tasks.find((t) => t.id === editTaskId)
 
+     const now = new Date();
+    // Pendente = não concluída E dentro do prazo 
+    const pendingTasks = tasks.filter(task => {
+        if (task.completed) return false; // remove concluídas
+        if (task.dueDate && new Date(task.dueDate) < now) return false; // remove falhadas
+        return true; // pendente
+    });
+
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(t => t.completed).length;
+    const failedTasks = tasks.filter(
+        t => !t.completed && t.dueDate && new Date(t.dueDate) < now
+    ).length;
+
     return(
         <div className="bg-[var(--color-background)] animate-[fadeInAnimation ease 2s] transition-all duration-300 pb-5 min-h-dvh flex flex-col justify-between">
             <Navbar/>
@@ -17,9 +31,9 @@ export function Dashboard(){
 
                 <section className=" flex flex-col flex-1 gap-5">
                     <div className="flex items-center justify-between gap-5">
-                        <TaskChart text="Total Tasks" icon={RiFileList3Line} chartValue={0} status="default"/>
-                        <TaskChart text="Cocluidas" icon={RiCheckboxCircleLine} chartValue={0} status="success"/>
-                        <TaskChart text="Falhadas" icon={RiCloseCircleLine} chartValue={0} status="failure"/>
+                        <TaskChart text="Total Tasks" icon={RiFileList3Line} chartValue={totalTasks} status="default"/>
+                        <TaskChart text="Cocluidas" icon={RiCheckboxCircleLine} chartValue={completedTasks} status="success"/>
+                        <TaskChart text="Falhadas" icon={RiCloseCircleLine} chartValue={failedTasks} status="failure"/>
                     </div>
 
                     <div className="flex flex-col gap-5 mt-[30px]  h-full">
@@ -27,7 +41,7 @@ export function Dashboard(){
 
                         <div className="bg-[var(--color-white)] p-2.5 rounded-xl h-full shadow-(--box-shadow)">
                             <ul className="gap-5 flex flex-col ">
-                                {tasks.map((task) => (
+                                {pendingTasks.map(task => (
                                     <li key={task.id}>
                                         <Task
                                             title={task.title}
