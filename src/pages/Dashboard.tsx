@@ -39,10 +39,10 @@ export function Dashboard(){
                     <div className="flex flex-col gap-5 mt-[30px]  h-full">
                         <SearchBar/>
 
-                        <div className="bg-[var(--color-white)] p-2.5 rounded-xl h-full shadow-(--box-shadow)">
-                            <ul className="gap-5 flex flex-col ">
+                        <div className="bg-[var(--color-white)] p-5 rounded-xl h-full shadow-(--box-shadow)">
+                            <ul className=" columns-2 overflow-hidden w-full justify-center flex gap-8">
                                 {pendingTasks.map(task => (
-                                    <li key={task.id}>
+                                    <li key={task.id} className=" break-inside-avoid mb-5">
                                         <Task
                                             title={task.title}
                                             description={task.description}

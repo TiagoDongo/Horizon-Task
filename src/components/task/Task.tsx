@@ -25,7 +25,7 @@ export function Task({ title, description, completed = false, hasdescription = f
                     <button onClick={onToggle} className="text-[var(--color-white)] border-2 rounded-md cursor-pointer" >
                         {completed ? <RiCloseFill size={26} /> : <RiCheckFill size={26} />}
                     </button>
-                    <h4 className="text-lg font-medium text-[var(--color-white)]">
+                    <h4 title={title} className="text-lg font-medium text-[var(--color-white)] truncate max-w-[85px] 2xl:max-w-[200px]">
                         {title}
                     </h4>
                 </div>

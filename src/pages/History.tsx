@@ -23,7 +23,7 @@ export function History(){
     });
 
     return(
-        <div className="bg-(--color-background) animate-[fadeInAnimation ease 2s] transition-all duration-300 pb-5 min-h-dvh flex flex-col ">
+        <div className="bg-(--color-background) animate-[fadeInAnimation ease 2s] transition-all duration-300 pb-5 min-h-dvh flex flex-col justify-between">
             <Navbar/>
 
             <main className="grid grid-cols-2  mt-[70px] px-5 gap-5 sm:grid-cols-1 lg:grid-cols-2">
@@ -44,22 +44,25 @@ export function History(){
                         </button>
                     </div>
                 </div>
-                <div className="bg-(--color-white) rounded-xl shadow-(--box-shadow) min-h-[570px] h-svh py-2.5 px-5">
-                    <h1 className="text-(--color-info-dark) text-2xl font-bold">Tasks</h1>
-                    <ul className="gap-5 flex flex-col ">
-                        {filteredTasks.map((task) => (
-                            <li key={task.id}>
-                                <Task
-                                    title={task.title}
-                                    description={task.description}
-                                    completed={task.completed}
-                                    hasdescription={!!task.description}
-                                    onToggle={() => toggleTaskStatus(task.id)}
-                                    onDelete={() => deleteTask(task.id)}
-                                />
-                            </li>
-                        ))}
-                    </ul>
+                <div className="bg-(--color-white) rounded-xl shadow-(--box-shadow) p-5">
+                    <h1 className="text-(--color-info-dark) text-2xl font-bold mb-5">Tasks</h1>
+
+                    <div className="flex flex-col min-h-[570px] max-h-[900px] overflow-y-auto">
+                        <ul className=" columns-1">
+                            {filteredTasks.map((task) => (
+                                <li key={task.id} className=" break-after-avoid">
+                                    <Task
+                                        title={task.title}
+                                        description={task.description}
+                                        completed={task.completed}
+                                        hasdescription={!!task.description}
+                                        onToggle={() => toggleTaskStatus(task.id)}
+                                        onDelete={() => deleteTask(task.id)}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </main>
 
